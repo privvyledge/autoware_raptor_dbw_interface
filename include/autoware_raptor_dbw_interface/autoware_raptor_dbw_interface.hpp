@@ -64,9 +64,6 @@
 #include <autoware_auto_vehicle_msgs/msg/wipers_command.hpp>
 #include <autoware_auto_vehicle_msgs/msg/hazard_lights_command.hpp>
 #include <autoware_auto_vehicle_msgs/srv/autonomy_mode_change.hpp>
-// todo remove the two include statements below
-#include <autoware_auto_common/common/types.hpp>
-//#include <motion_common/motion_common.hpp>
 
 // Type Definitions
 #include <std_msgs/msg/bool.hpp>
@@ -81,13 +78,15 @@
 #include <mutex>
 #include <cstdint>
 #include <unordered_map>
+// todo remove the include statement below
+#include <autoware_auto_common/common/types.hpp>
 
 
 // Namespace definitions.  Todo: remove autoware_auto_common definitions and replace float32_t with float, float64_t with double, bool8_t with bool. Get Tau and Pi from C++
-using autoware_auto_common::common::types::bool8_t;
-using autoware_auto_common::common::types::float32_t;
-using autoware_auto_common::common::types::float64_t;
-using autoware_auto_common::common::types::TAU;
+using autoware::common::types::bool8_t;
+using autoware::common::types::float32_t;
+using autoware::common::types::float64_t;
+using autoware::common::types::TAU;
 using autoware::common::types::PI;
 
 // Raptor DBW Command namespaces
@@ -133,7 +132,7 @@ using autoware_auto_vehicle_msgs::msg::HazardLightsCommand;
 using vehicle_info_util::VehicleInfo;
 using autoware_auto_vehicle_msgs::msg::GearReport;
 using autoware_auto_vehicle_msgs::msg::ControlModeReport;
-using autoware_auto_vehicle_msgs::msg::SteeringReport;
+//using autoware_auto_vehicle_msgs::msg::SteeringReport;
 using autoware_auto_vehicle_msgs::msg::VelocityReport;
 using tier4_control_msgs::msg::GateMode;
 using autoware_auto_vehicle_msgs::msg::VehicleStateReport;
@@ -162,7 +161,8 @@ std::unordered_map<uint8_t, uint8_t> control_mode_mapping = {
 
 namespace autoware_raptor_dbw_interface
 {
-    class AUTOWARE_RAPTOR_DBW_INTERFACE_PUBLIC RaptorDBWInterface : public rclcpp::Node
+    class AUTOWARE_RAPTOR_DBW_INTERFACE_PUBLIC RaptorDBWInterface
+     : public rclcpp::Node
     {
         public:
             explicit RaptorDBWInterface (
@@ -197,7 +197,7 @@ namespace autoware_raptor_dbw_interface
             rclcpp::Publisher<VehicleKinematicState>::SharedPtr m_vehicle_kin_state_pub; // todo: might remove
             rclcpp::Publisher<autoware_auto_vehicle_msgs::msg::GearReport>::SharedPtr gear_status_pub_;  // gear_rpt_pub_
             rclcpp::Publisher<ControlModeReport>::SharedPtr control_mode_rpt_pub_;
-            rclcpp::Publisher<SteeringReport>::SharedPtr steering_rpt_pub_;
+            rclcpp::Publisher<autoware_auto_vehicle_msgs::msg::SteeringReport>::SharedPtr steering_rpt_pub_;
             rclcpp::Publisher<VelocityReport>::SharedPtr velocity_rpt_pub_;
             rclcpp::Publisher<BatteryStatus>::SharedPtr battery_rpt_pub_;
             rclcpp::Publisher<tier4_vehicle_msgs::msg::ActuationStatusStamped>::SharedPtr actuation_status_pub_;
