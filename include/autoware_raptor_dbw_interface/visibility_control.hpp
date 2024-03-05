@@ -12,26 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef NE_RAPTOR_INTERFACE__VISIBILITY_CONTROL_HPP_
-#define NE_RAPTOR_INTERFACE__VISIBILITY_CONTROL_HPP_
+#ifndef AUTOWARE_RAPTOR_DBW_INTERFACE__VISIBILITY_CONTROL_HPP_
+#define AUTOWARE_RAPTOR_DBW_INTERFACE__VISIBILITY_CONTROL_HPP_
 
 ////////////////////////////////////////////////////////////////////////////////
 #if defined(__WIN32)
-  #if defined(NE_RAPTOR_INTERFACE_BUILDING_DLL) || defined(NE_RAPTOR_INTERFACE_EXPORTS)
-    #define NE_RAPTOR_INTERFACE_PUBLIC __declspec(dllexport)
-    #define NE_RAPTOR_INTERFACE_LOCAL
-  #else  // defined(NE_RAPTOR_INTERFACE_BUILDING_DLL) || defined(NE_RAPTOR_INTERFACE_EXPORTS)
-    #define NE_RAPTOR_INTERFACE_PUBLIC __declspec(dllimport)
-    #define NE_RAPTOR_INTERFACE_LOCAL
-  #endif  // defined(NE_RAPTOR_INTERFACE_BUILDING_DLL) || defined(NE_RAPTOR_INTERFACE_EXPORTS)
+  #if defined(AUTOWARE_RAPTOR_DBW_INTERFACE_BUILDING_DLL) || defined(AUTOWARE_RAPTOR_DBW_INTERFACE_EXPORTS)
+    #define AUTOWARE_RAPTOR_DBW_INTERFACE_PUBLIC __declspec(dllexport)
+    #define AUTOWARE_RAPTOR_DBW_INTERFACE_LOCAL
+  #else  // defined(AUTOWARE_RAPTOR_DBW_INTERFACE_BUILDING_DLL) || defined(AUTOWARE_RAPTOR_DBW_INTERFACE_EXPORTS)
+    #define AUTOWARE_RAPTOR_DBW_INTERFACE_PUBLIC __declspec(dllimport)
+    #define AUTOWARE_RAPTOR_DBW_INTERFACE_LOCAL
+  #endif  // defined(AUTOWARE_RAPTOR_DBW_INTERFACE_BUILDING_DLL) || defined(AUTOWARE_RAPTOR_DBW_INTERFACE_EXPORTS)
 #elif defined(__linux__)
-  #define NE_RAPTOR_INTERFACE_PUBLIC __attribute__((visibility("default")))
-  #define NE_RAPTOR_INTERFACE_LOCAL __attribute__((visibility("hidden")))
+  #define AUTOWARE_RAPTOR_DBW_INTERFACE_PUBLIC __attribute__((visibility("default")))
+  #define AUTOWARE_RAPTOR_DBW_INTERFACE_LOCAL __attribute__((visibility("hidden")))
 #elif defined(__APPLE__)
-  #define NE_RAPTOR_INTERFACE_PUBLIC __attribute__((visibility("default")))
-  #define NE_RAPTOR_INTERFACE_LOCAL __attribute__((visibility("hidden")))
+  #define AUTOWARE_RAPTOR_DBW_INTERFACE_PUBLIC __attribute__((visibility("default")))
+  #define AUTOWARE_RAPTOR_DBW_INTERFACE_LOCAL __attribute__((visibility("hidden")))
 #else
   #error "Unsupported Build Configuration"
 #endif
 
-#endif  // NE_RAPTOR_INTERFACE__VISIBILITY_CONTROL_HPP_
+#endif  // AUTOWARE_RAPTOR_DBW_INTERFACE__VISIBILITY_CONTROL_HPP_

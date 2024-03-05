@@ -35,19 +35,19 @@ ament_auto_find_build_dependencies(REQUIRED
   ${${PROJECT_NAME}_BUILDTOOL_DEPENDS}
 )
 
-set(RAPTOR_DBW_INTERFACE_LIB_SRC
-  src/raptor_dbw_interface.cpp
+set(AUTOWARE_RAPTOR_DBW_INTERFACE_LIB_SRC
+  src/autoware_raptor_dbw_interface.cpp
 )
 
-set(RAPTOR_DBW_INTERFACE_LIB_HEADERS
+set(AUTOWARE_RAPTOR_DBW_INTERFACE_LIB_HEADERS
   include/autoware_raptor_dbw_interface/autoware_raptor_dbw_interface.hpp
   include/autoware_raptor_dbw_interface/visibility_control.hpp
 )
 
 # generate library
 ament_auto_add_library(${PROJECT_NAME} SHARED
-  ${RAPTOR_DBW_INTERFACE_LIB_SRC}
-  ${RAPTOR_DBW_INTERFACE_LIB_HEADERS}
+  ${AUTOWARE_RAPTOR_DBW_INTERFACE_LIB_SRC}
+  ${AUTOWARE_RAPTOR_DBW_INTERFACE_LIB_HEADERS}
 )
 
 set(AUTOWARE_RAPTOR_DBW_INTERFACE_NODE_SRC
@@ -64,6 +64,7 @@ ament_auto_add_library(${PROJECT_NAME}_node SHARED
   ${AUTOWARE_RAPTOR_DBW_INTERFACE_NODE_HEADERS}
 )
 
+# todo: remove line below
 target_compile_options(${PROJECT_NAME} PRIVATE -Wno-old-style-cast)
 
 set(NODE_NAME ${PROJECT_NAME}_node_exe)
