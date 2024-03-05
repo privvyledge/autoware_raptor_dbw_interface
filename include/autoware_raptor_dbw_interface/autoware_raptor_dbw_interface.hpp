@@ -65,7 +65,7 @@
 #include <autoware_auto_vehicle_msgs/msg/hazard_lights_command.hpp>
 #include <autoware_auto_vehicle_msgs/srv/autonomy_mode_change.hpp>
 // todo remove the two include statements below
-//#include <autoware_auto_common/common/types.hpp>
+#include <autoware_auto_common/common/types.hpp>
 //#include <motion_common/motion_common.hpp>
 
 // Type Definitions
@@ -282,3 +282,4 @@ namespace autoware_raptor_dbw_interface
     };  // class RaptorDBWInterface
 
 }  // namespace autoware_raptor_dbw_interface
+#endif  // AUTOWARE_RAPTOR_DBW_INTERFACE__RAPTOR_DBW_INTERFACE_HPP_
