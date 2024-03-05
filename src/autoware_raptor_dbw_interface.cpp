@@ -9,7 +9,7 @@
 
 namespace autoware_raptor_dbw_interface
 {
-    RaptorDBWInterfaceNode::RaptorDBWInterfaceNode(
+RaptorDBWInterface::RaptorDBWInterface(
         rclcpp::Node & node,
         uint16_t ecu_build_num,
         float32_t front_axle_to_cog,

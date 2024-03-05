@@ -1,5 +1,5 @@
-#ifndef AUTOWARE_RAPTOR_DBW_INTERFACE__RAPTOR_DBW_INTERFACE_HPP_
-#define AUTOWARE_RAPTOR_DBW_INTERFACE__RAPTOR_DBW_INTERFACE_HPP_
+#ifndef AUTOWARE_RAPTOR_DBW_INTERFACE__AUTOWARE_RAPTOR_DBW_INTERFACE_HPP_
+#define AUTOWARE_RAPTOR_DBW_INTERFACE__AUTOWARE_RAPTOR_DBW_INTERFACE_HPP_
 
 // Raptor DBW command messages
 #include <raptor_dbw_msgs/msg/accelerator_pedal_cmd.hpp>
@@ -46,6 +46,7 @@
 #include <autoware_auto_control_msgs/msg/high_level_control_command.hpp>
 #include <autoware_auto_vehicle_msgs/msg/vehicle_control_command.hpp>
 #include <autoware_auto_vehicle_msgs/msg/vehicle_state_command.hpp>
+#include <autoware_auto_vehicle_msgs/msg/vehicle_state_report.hpp>
 
 // Autoware Core Feedback messages
 #include <autoware_auto_vehicle_msgs/msg/gear_report.hpp>
@@ -80,6 +81,8 @@
 #include <unordered_map>
 // todo remove the include statement below
 #include <autoware_auto_common/common/types.hpp>
+
+#include <autoware_raptor_dbw_interface/visibility_control.hpp>
 
 
 // Namespace definitions.  Todo: remove autoware_auto_common definitions and replace float32_t with float, float64_t with double, bool8_t with bool. Get Tau and Pi from C++
@@ -162,7 +165,6 @@ std::unordered_map<uint8_t, uint8_t> control_mode_mapping = {
 namespace autoware_raptor_dbw_interface
 {
     class AUTOWARE_RAPTOR_DBW_INTERFACE_PUBLIC RaptorDBWInterface
-     : public rclcpp::Node
     {
         public:
             explicit RaptorDBWInterface (
@@ -177,42 +179,13 @@ namespace autoware_raptor_dbw_interface
                 float32_t deceleration_limit,
                 float32_t acceleration_positive_jerk_limit,
                 float32_t deceleration_negative_jerk_limit,
-                uint32_t pub_period
+                uint32_t pub_period,
+                const VehicleInfo vehicle_info
             );
 
             ~RaptorDBWInterface() noexcept override = default;
 
         private:
-            // Publishers (to Raptor DBW)
-            rclcpp::Publisher<AcceleratorPedalCmd>::SharedPtr m_accel_cmd_pub;
-            rclcpp::Publisher<BrakeCmd>::SharedPtr m_brake_cmd_pub;
-            rclcpp::Publisher<GearCmd>::SharedPtr m_gear_cmd_pub;
-            rclcpp::Publisher<GlobalEnableCmd>::SharedPtr m_gl_en_cmd_pub;
-            rclcpp::Publisher<MiscCmd>::SharedPtr m_misc_cmd_pub;
-            rclcpp::Publisher<SteeringCmd>::SharedPtr m_steer_cmd_pub;
-            rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr m_dbw_enable_cmd_pub;
-            rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr m_dbw_disable_cmd_pub;
-
-            // Publishers (to Autoware)
-            rclcpp::Publisher<VehicleKinematicState>::SharedPtr m_vehicle_kin_state_pub; // todo: might remove
-            rclcpp::Publisher<autoware_auto_vehicle_msgs::msg::GearReport>::SharedPtr gear_status_pub_;  // gear_rpt_pub_
-            rclcpp::Publisher<ControlModeReport>::SharedPtr control_mode_rpt_pub_;
-            rclcpp::Publisher<autoware_auto_vehicle_msgs::msg::SteeringReport>::SharedPtr steering_rpt_pub_;
-            rclcpp::Publisher<VelocityReport>::SharedPtr velocity_rpt_pub_;
-            rclcpp::Publisher<BatteryStatus>::SharedPtr battery_rpt_pub_;
-            rclcpp::Publisher<tier4_vehicle_msgs::msg::ActuationStatusStamped>::SharedPtr actuation_status_pub_;
-
-            // Subscribers (from Raptor DBW)
-            rclcpp::SubscriptionBase::SharedPtr
-                m_brake_rpt_sub, m_gear_rpt_sub, m_misc_rpt_sub,
-                m_other_acts_rpt_sub, m_steering_rpt_sub, m_wheel_spd_rpt_sub;
-
-            // Subscribers (from Autoware)
-            rclcpp::Subscription<autoware_auto_control_msgs::msg::AckermannControlCommand>::SharedPtr control_cmd_sub_;
-            rclcpp::Subscription<GearCommand>::SharedPtr gear_cmd_sub_;
-            rclcpp::Subscription<GateMode>::SharedPtr gate_mode_cmd_sub_;
-            rclcpp::Subscription<VehicleEmergencyStamped>::SharedPtr emergency_cmd_sub_;
-
             // Initializae empty messages
             autoware_auto_control_msgs::msg::AckermannControlCommand::ConstSharedPtr control_cmd_ptr_;
             AcceleratorPedalCmd m_accel_cmd{};
@@ -282,4 +255,4 @@ namespace autoware_raptor_dbw_interface
     };  // class RaptorDBWInterface
 
 }  // namespace autoware_raptor_dbw_interface
-#endif  // AUTOWARE_RAPTOR_DBW_INTERFACE__RAPTOR_DBW_INTERFACE_HPP_
+#endif  // AUTOWARE_RAPTOR_DBW_INTERFACE__AUTOWARE_RAPTOR_DBW_INTERFACE_HPP_
